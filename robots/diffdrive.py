@@ -24,3 +24,4 @@ class DiffDriveRobot:
 
         self.traj_x.append(self.pose.x)
         self.traj_y.append(self.pose.y)
+
