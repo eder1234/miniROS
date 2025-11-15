@@ -15,6 +15,10 @@ class MiniRosSimulator:
 
         self.xlim = (-5, 5)
         self.ylim = (-5, 5)
+        self.lidars = []
+
+    def add_lidar(self, lidar):
+        self.lidars.append(lidar)
 
     def add_node(self, node):
         node._attach_sim(self)
@@ -24,6 +28,10 @@ class MiniRosSimulator:
         self.robots.append(robot)
 
     def step(self):
+        for lidar in self.lidars:
+            scan = lidar.scan()
+            self.topics.publish(lidar.topic, scan)
+
         # 1. Node computations
         for node in self.nodes:
             node.step(self.dt)
