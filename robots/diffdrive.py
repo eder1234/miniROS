@@ -25,3 +25,5 @@ class DiffDriveRobot:
         self.traj_x.append(self.pose.x)
         self.traj_y.append(self.pose.y)
 
+def stop(self):
+    self.pose = self.pose  # no change, just semantic
