@@ -87,5 +87,7 @@ class MiniRosSimulator:
         )
 
         plt.close(fig)   # Important so Colab doesn't show an empty static figure
+        ani.save("animation.gif", writer="pillow", fps=20)
         return HTML(ani.to_jshtml())
+
 
