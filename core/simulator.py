@@ -6,7 +6,7 @@ from .messages import Twist
 from IPython.display import HTML
 
 class MiniRosSimulator:
-    def __init__(self, dt=0.05):
+    def __init__(self, dt=0.05, gif_fps=1):
         self.dt = dt
         self.time = 0.0
         self.nodes = []
@@ -15,6 +15,8 @@ class MiniRosSimulator:
 
         self.xlim = (-5, 5)
         self.ylim = (-5, 5)
+
+        self.gif_fps = gif_fps
 
     def add_node(self, node):
         node._attach_sim(self)
@@ -87,7 +89,5 @@ class MiniRosSimulator:
         )
 
         plt.close(fig)   # Important so Colab doesn't show an empty static figure
-        ani.save("animation.gif", writer="pillow", fps=20)
+        ani.save("animation.gif", writer="pillow", fps=self.gif_fps)
         return HTML(ani.to_jshtml())
-
-
