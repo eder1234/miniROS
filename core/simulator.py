@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from matplotlib import animation
 from .topic import TopicManager
 from .messages import Twist
+from IPython.display import HTML
 
 class MiniRosSimulator:
     def __init__(self, dt=0.05):
@@ -79,7 +80,9 @@ class MiniRosSimulator:
 
         ani = animation.FuncAnimation(
             fig, update, init_func=init,
-            interval=interval_ms, blit=True
+            interval=interval_ms, blit=True,
+            cache_frame_data=False
         )
-        plt.show()
-        return ani
+
+        plt.close(fig)   # Important so Colab doesn't show an empty static figure
+        return HTML(ani.to_jshtml())
