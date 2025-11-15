@@ -72,7 +72,7 @@ class MiniRosSimulator:
             self.step()
 
             for i, r in enumerate(self.robots):
-                patches_robot[i].set_data(r.pose.x, r.pose.y)
+                patches_robot[i].set_data([r.pose.x], [r.pose.y])
                 x_data = list(r.traj_x[-tail_length:])
                 y_data = list(r.traj_y[-tail_length:])
 
@@ -88,3 +88,4 @@ class MiniRosSimulator:
 
         plt.close(fig)   # Important so Colab doesn't show an empty static figure
         return HTML(ani.to_jshtml())
+
