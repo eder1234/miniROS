@@ -28,22 +28,24 @@ class MiniRosSimulator:
         self.robots.append(robot)
 
     def step(self):
+        # 1. Publish lidar scans
         for lidar in self.lidars:
             scan = lidar.scan()
             self.topics.publish(lidar.topic, scan)
 
-        # 1. Node computations
+        # 2. Run nodes
         for node in self.nodes:
             node.step(self.dt)
 
-        # 2. Apply commands
+        # 3. Apply robot commands
         for robot in self.robots:
             cmd = self.topics.read(robot.cmd_topic)
-            if cmd is None: 
+            if cmd is None:
                 cmd = Twist(0, 0)
             robot.update(self.dt, cmd)
 
         self.time += self.dt
+
 
     def run(self, duration):
         steps = int(duration / self.dt)
