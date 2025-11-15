@@ -73,9 +73,11 @@ class MiniRosSimulator:
 
             for i, r in enumerate(self.robots):
                 patches_robot[i].set_data(r.pose.x, r.pose.y)
-                patches_traj[i].set_data(
-                    r.traj_x[-tail_length:], r.traj_y[-tail_length:]
-                )
+                x_data = list(r.traj_x[-tail_length:])
+                y_data = list(r.traj_y[-tail_length:])
+
+                patches_traj[i].set_data(x_data, y_data)
+
             return patches_robot + patches_traj
 
         ani = animation.FuncAnimation(
