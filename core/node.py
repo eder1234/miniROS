@@ -3,7 +3,7 @@ class Node:
     Base class for miniROS nodes.
     Override step(self, dt) to compute actions.
     """
-    def __init__(self, name: str):
+    def __init__(self, name="unnamed"):
         self.name = name
         self._sim = None
 
@@ -23,3 +23,4 @@ class Node:
 
     def step(self, dt: float):
         pass
+
